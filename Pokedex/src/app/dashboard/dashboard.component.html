@@ -8,8 +8,12 @@
     </div>
 </div>
 
-<app-pokemon-card-carousel> </app-pokemon-card-carousel>
+<app-pokemon-search (onSearchClick)="setSearchedPokemon($event);"></app-pokemon-search>
 
-<div class="dashboardFooter" >
+<!-- <app-pokemon-detail-card></app-pokemon-detail-card> -->
+
+<app-pokemon-card-carousel [pokemonSearchText]="searchedPokemonText"></app-pokemon-card-carousel>
+
+<div > <!--Use dashboardFooter class for this div-->
     <hr style="color: grey;">
 </div>

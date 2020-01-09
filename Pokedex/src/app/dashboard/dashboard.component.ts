@@ -7,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  private headerTitle = "Pokèdex";
+  private headerTitle : string= "Pokèdex";
+  private searchedPokemonText : string = "1";
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  setSearchedPokemon(searchtext : string) : void
+  {
+    this.searchedPokemonText = searchtext;
+    //alert(searchtext);
+  }
 }
