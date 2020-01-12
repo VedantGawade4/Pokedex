@@ -10,10 +10,10 @@
 
 <app-pokemon-search (onSearchClick)="setSearchedPokemon($event);"></app-pokemon-search>
 
-<!-- <app-pokemon-detail-card></app-pokemon-detail-card> -->
+<router-outlet></router-outlet> 
 
-<app-pokemon-card-carousel [pokemonSearchText]="searchedPokemonText"></app-pokemon-card-carousel>
-
-<div > <!--Use dashboardFooter class for this div-->
+<div> <!--Use dashboardFooter class for this div-->
     <hr style="color: grey;">
+    <p style="margin-left:1%;">Recent searches :</p>
+    <app-pokemon-thumbnail-collection></app-pokemon-thumbnail-collection>
 </div>

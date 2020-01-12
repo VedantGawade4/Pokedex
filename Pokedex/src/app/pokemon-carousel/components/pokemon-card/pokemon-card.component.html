@@ -1,7 +1,8 @@
-<div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png" alt="Avatar" style="width: 90%; margin-left: 10%; margin-right: 10%;">
+<div class="card" (click)="onCardClick();">
+    <img [src]="this.pokemon?.sprites.front_default" alt="Pokemon Image" style="width: 90%; margin-left: 10%; margin-right: 10%;">
     <div class="container" >
-      <h3 style="text-align: center;"><b>Charmander</b></h3> 
-      <p style="text-align: center;">5/1000</p> 
+      <h3 style="text-align: center;"><b>{{this.pokemon?.name}}</b></h3> 
+      <p style="text-align: center;">{{this.pokemon?.id}} </p> 
     </div>
+    <h3 style="text-align: right; margin-right: 10%;">...</h3>
   </div>

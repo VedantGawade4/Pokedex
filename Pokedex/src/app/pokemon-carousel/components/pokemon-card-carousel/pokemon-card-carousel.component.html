@@ -1,8 +1,10 @@
 
 <div style="display: flex;">
     <div class="center">
-        <img src="assets/leftArrow.png" alt="Prev" width="20px" height="20px" style="margin-right: 20px;"/>
-        <app-pokemon-card></app-pokemon-card>
-        <img src="assets/rightArrow.png" width="20px" height="20px" style="margin-left: 20px;"/>
+        <img src="assets/leftArrow.png" (click)="onPrevious();" alt="Prev" width="20px" height="20px" style="margin-right: 20px;"/>
+
+        <app-pokemon-card [pokemon]="currentPokemon | async"></app-pokemon-card>
+        
+        <img src="assets/rightArrow.png" (click)="onNext();" width="20px" height="20px" style="margin-left: 20px;"/>
     </div>
 </div>

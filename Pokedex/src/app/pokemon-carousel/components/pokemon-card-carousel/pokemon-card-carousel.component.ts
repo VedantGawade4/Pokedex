@@ -1,30 +1,49 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DummyJson } from 'src/app/core/dummyJsons/pokemon';
 import { IPokemon } from 'src/app/core/models/IPokemon';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PokemonService } from 'src/app/core/services/pokemon.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-card-carousel',
   templateUrl: './pokemon-card-carousel.component.html',
   styleUrls: ['./pokemon-card-carousel.component.css']
 })
-export class PokemonCardCarouselComponent implements OnInit,OnChanges {
+export class PokemonCardCarouselComponent implements OnInit {
   
-  @Input() pokemonSearchText : string;
+  currentPokemon : Observable<IPokemon>;
+  currentPokemonId : string;
+  pokemonIdToFind : string;
 
-  constructor() { }
+  constructor(private router : Router, private route: ActivatedRoute, private pokemonService : PokemonService) { }
 
   ngOnInit() {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.setPokemonCardData(changes.pokemonSearchText.currentValue);
+    this.route.params.subscribe(params => {
+      this.pokemonIdToFind = params['pokemonId'];
+      this.setPokemonCardData(this.pokemonIdToFind);
+   });
   }
 
   private setPokemonCardData(searchText : string) : boolean
   {
-    DummyJson.getPokemonById(+searchText).subscribe(
-      (result : IPokemon)=>{ alert(result.name) }
+    this.pokemonService.getPokemonById(+searchText).subscribe(
+      (result : IPokemon)=>{ 
+          this.currentPokemon = of(result);
+          this.currentPokemonId = result.id.toString(); }
     );
     return true;
+  }
+
+  private onPrevious() : void
+  {
+    let prevId = +this.currentPokemonId - 1;
+    this.router.navigate(["dashboard/" + prevId]);
+  }
+
+  private onNext() : void
+  {
+    let nextId = +this.currentPokemonId + 1;
+    this.router.navigate(["dashboard/" + nextId]);
   }
 }

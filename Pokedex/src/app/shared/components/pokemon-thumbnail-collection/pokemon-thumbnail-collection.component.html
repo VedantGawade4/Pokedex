@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div *ngFor="let pokemon of evolutionChainPokemonsO | async" >
+  <div class="cardgallery" style="width: auto;">
+    <div class="w3-container">
+
+      <app-pokemon-thumbnail-card [pokemon]="pokemon"></app-pokemon-thumbnail-card>
+
+    </div>
+  </div>
+</div>

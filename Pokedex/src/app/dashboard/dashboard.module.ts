@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
+
+import { DashboardRouterModule } from './dashboard-router.module';
+import { CommonModule } from '@angular/common';
 import { PokemonCarouselModule } from '../pokemon-carousel/pokemon-carousel.module';
-import { PokemonDetailCardModule } from '../pokemon-detail-card/pokemon-detail-card.module';
 import { PokemonSearchModule } from '../pokemon-search/pokemon-search.module';
-
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    DashboardRouterModule,
     PokemonCarouselModule,
-    PokemonDetailCardModule,
-    PokemonSearchModule
+    PokemonSearchModule,
+    SharedModule
   ],
   exports:[
     DashboardComponent

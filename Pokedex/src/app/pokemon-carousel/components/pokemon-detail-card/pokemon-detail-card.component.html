@@ -1,0 +1,23 @@
+<div class="row card" style="margin-left: 10%; margin-right: 10%;">
+        
+        <p (click)="onBack();" style="text-align: left; margin-left: 3%; cursor: default;">
+                <img src="assets/leftArrow.png" width="12px" height="12px"/>
+                Back
+        </p>
+
+        <div class="column" style="width: 40%;">
+            <img [src]="(this.pokemon | async)?.sprites.front_default" alt="Pokemon Image" style="width: 40%;">
+            <div style="margin-left: 5%;">
+                <h3>{{(this.pokemon | async)?.name}}</h3>
+                <p>Height : {{(this.pokemon | async)?.height}} ft</p>
+                <p>Weight : {{(this.pokemon | async)?.weight}} lbs</p>
+                <p>Abilities : {{(this.pokemon | async)?.abilities | pokemonAbilityName}}</p>
+                <p>Experience : {{(this.pokemon | async)?.base_experience}}</p>
+            </div>
+        </div>
+        <div class="column" style="width: 60%; height: 100%;">
+            <p style="margin-left: 2%;">Evolution chain :</p>
+            <app-pokemon-thumbnail-collection [pokemonEvoulutionChainIds]="this.pokemonEvolutionChainIdsO | async"></app-pokemon-thumbnail-collection>
+        </div>
+
+</div>

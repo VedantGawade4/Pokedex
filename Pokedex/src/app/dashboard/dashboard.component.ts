@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   private headerTitle : string= "Pokèdex";
-  private searchedPokemonText : string = "1";
-
-  constructor() { }
+  
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   setSearchedPokemon(searchtext : string) : void
   {
-    this.searchedPokemonText = searchtext;
-    //alert(searchtext);
+    this.router.navigate(["dashboard/" + searchtext]);
   }
 }
