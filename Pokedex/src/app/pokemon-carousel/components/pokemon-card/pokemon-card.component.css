@@ -1,10 +1,10 @@
 .card {
-    box-shadow: 0 4px 8px 0 #F5ACB4;
+    box-shadow: 0 4px 8px 0 #d1d1d1;
     transition: 0.3s;
     width: 200px;
     height: auto;
     display: block;
-    border: 1px solid #F5ACB4;
+    border: 1px solid #d1d1d1;
   }
 
 .card:hover {

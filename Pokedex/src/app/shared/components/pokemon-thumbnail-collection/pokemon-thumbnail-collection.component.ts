@@ -11,6 +11,7 @@ import { Observable, of } from 'rxjs';
 export class PokemonThumbnailCollectionComponent implements OnInit, OnChanges {
 
   @Input() pokemonEvoulutionChainIds : Array<string>;
+  @Input() sort : boolean = true;
 
   evolutionChainPokemons : Array<IPokemon> = new Array<IPokemon>();
   evolutionChainPokemonsO : Observable<Array<IPokemon>>;
@@ -23,10 +24,13 @@ export class PokemonThumbnailCollectionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     if(changes.pokemonEvoulutionChainIds.currentValue !== null && changes.pokemonEvoulutionChainIds.currentValue !== undefined)
     {
+      this.evolutionChainPokemons = [];
+      this.evolutionChainPokemonsO = of(this.evolutionChainPokemons);
+
       this.pokemonEvoulutionChainIds.forEach(element => {
         this.pokemonService.getPokemonById(+element).subscribe(
           (result : IPokemon) => {
-            this.evolutionChainPokemons.push(result);
+            this.insertPokemonSorted(result);
             this.evolutionChainPokemonsO = of(this.evolutionChainPokemons);
           }
         );
@@ -34,4 +38,27 @@ export class PokemonThumbnailCollectionComponent implements OnInit, OnChanges {
     }
   }
 
+  insertPokemonSorted(pokemon : IPokemon) : void
+  {
+    if(this.sort)
+    {
+      for (let index = 0; index < this.evolutionChainPokemons.length; index++) 
+      {
+        if(pokemon.base_experience < this.evolutionChainPokemons[index].base_experience)
+        {
+          let prefix = this.evolutionChainPokemons.slice(0,index);
+          let suffix = this.evolutionChainPokemons.slice(index, this.evolutionChainPokemons.length);
+          prefix.push(pokemon);
+          this.evolutionChainPokemons = prefix.concat(suffix);
+          return;
+        }
+      }
+      this.evolutionChainPokemons.push(pokemon);
+    }
+    else
+    {
+      this.evolutionChainPokemons.push(pokemon);
+    }
+    return;
+  }
 }

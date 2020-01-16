@@ -43,7 +43,7 @@ export class PokemonDetailCardComponent implements OnInit {
     this.pokemonService.getPokemonById(+searchText).subscribe(
       (result : IPokemon) => { 
         this.pokemon = of(result);
-
+        this.pokemonEvolutionChainIds = [];
         this.getPokemonSpeciesDetails(result.id.toString());
       }
     );
@@ -72,8 +72,8 @@ export class PokemonDetailCardComponent implements OnInit {
 
          //get the Observable for evolution chain ids
          this.pokemonEvolutionChainIdsO = of(this.pokemonEvolutionChainIds);
-
-        // alert(this.pokemonEvolutionChainIdsO);
+         
+        // alert(this.pokemonEvolutionChainIds);
       }
     );
 
@@ -104,7 +104,7 @@ export class PokemonDetailCardComponent implements OnInit {
   getIdFromUrl(url : string) : string
   {
     let tokens = url.split("/");
-    //alert(tokens);
+    // alert(tokens);
     if(tokens.length < 2) return "No_Id_found";
     //alert(tokens[tokens.length-2]);
     return tokens[tokens.length-2];

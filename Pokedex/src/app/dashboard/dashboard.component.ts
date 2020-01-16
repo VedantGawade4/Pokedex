@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../core/services/local-storage.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +11,14 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   private headerTitle : string= "Pokèdex";
-  
-  constructor(private router: Router) { }
+  private recentPokemonSearchIdsO : Observable<Array<number>>;
+
+  constructor(private localStorageService : LocalStorageService, private router: Router) { }
 
   ngOnInit() {
+    this.localStorageService.recentPokemonSearchIdsO.subscribe(
+      idArray => {  this.recentPokemonSearchIdsO = of(idArray); }
+    );
   }
 
   setSearchedPokemon(searchtext : string) : void

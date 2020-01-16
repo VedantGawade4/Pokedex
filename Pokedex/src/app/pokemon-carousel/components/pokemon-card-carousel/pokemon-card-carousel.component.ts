@@ -4,6 +4,7 @@ import { IPokemon } from 'src/app/core/models/IPokemon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonService } from 'src/app/core/services/pokemon.service';
 import { Observable, of } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-pokemon-card-carousel',
@@ -16,7 +17,7 @@ export class PokemonCardCarouselComponent implements OnInit {
   currentPokemonId : string;
   pokemonIdToFind : string;
 
-  constructor(private router : Router, private route: ActivatedRoute, private pokemonService : PokemonService) { }
+  constructor(private localStorageService : LocalStorageService ,private router : Router, private route: ActivatedRoute, private pokemonService : PokemonService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,7 +31,10 @@ export class PokemonCardCarouselComponent implements OnInit {
     this.pokemonService.getPokemonById(+searchText).subscribe(
       (result : IPokemon)=>{ 
           this.currentPokemon = of(result);
-          this.currentPokemonId = result.id.toString(); }
+          this.currentPokemonId = result.id.toString();
+          this.localStorageService.addRecentSearch(+searchText);
+          
+        }
     );
     return true;
   }

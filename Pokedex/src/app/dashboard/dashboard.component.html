@@ -12,8 +12,8 @@
 
 <router-outlet></router-outlet> 
 
-<div> <!--Use dashboardFooter class for this div-->
+<div > <!--Use dashboardFooter class for this div-->
     <hr style="color: grey;">
     <p style="margin-left:1%;">Recent searches :</p>
-    <app-pokemon-thumbnail-collection></app-pokemon-thumbnail-collection>
+    <app-pokemon-thumbnail-collection [pokemonEvoulutionChainIds]="this.recentPokemonSearchIdsO | async" [sort]="false"></app-pokemon-thumbnail-collection>
 </div>

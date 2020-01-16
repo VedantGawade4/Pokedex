@@ -25,7 +25,6 @@ export class PokemonSearchComponent implements OnInit {
     {
       return;
     }
-
     this.onSearchClick.emit(this.searchText);
   }
 }
